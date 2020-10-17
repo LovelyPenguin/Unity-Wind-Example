@@ -7,11 +7,10 @@ public class GetWindDirection : MonoBehaviour
     public Transform windDirection;
     public float windPower = 5f;
     private Vector3 setDirection;
-    private Cloth myCloth;
+    public Cloth myCloth;
     // Start is called before the first frame update
     void Start()
     {
-        myCloth = GetComponent<Cloth>();
         setDirection = windDirection.forward;
         myCloth.externalAcceleration = setDirection * windPower;
     }
@@ -35,5 +34,19 @@ public class GetWindDirection : MonoBehaviour
         Debug.Log("Hello");
 
         myCloth.externalAcceleration = setDirection * this.windPower;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Inside"))
+        {
+            Debug.Log("Inside");
+            myCloth.externalAcceleration = Vector3.zero;
+        }
+        if (other.CompareTag("Outside"))
+        {
+            Debug.Log("Outside");
+            myCloth.externalAcceleration = setDirection * windPower;
+        }
     }
 }
