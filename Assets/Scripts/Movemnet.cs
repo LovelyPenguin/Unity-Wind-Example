@@ -5,7 +5,6 @@ using UnityEngine;
 public class Movemnet : MonoBehaviour
 {
     public float speed = 10f;
-    public float rotationSpeed = 100f;
 
     // Start is called before the first frame update
     void Start()
@@ -19,12 +18,17 @@ public class Movemnet : MonoBehaviour
         
     }
 
+    
     private void FixedUpdate()
     {
-        float translation = Input.GetAxis("Vertical") * speed * Time.deltaTime;
-        float rotation = Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime;
+        float vertical = Input.GetAxis("Vertical") * speed * Time.deltaTime;
+        float horizontal = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
 
-        transform.Translate(0, 0, translation);
-        transform.Rotate(0, rotation, 0);
+        transform.Translate(horizontal, 0, vertical);
+    }
+
+    public void SetRotation(float yaw)
+    {
+        transform.eulerAngles = new Vector3(0, yaw, 0.0f);
     }
 }
