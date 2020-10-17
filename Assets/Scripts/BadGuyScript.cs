@@ -17,7 +17,7 @@ public class BadGuyScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("Key Down");
-            playerLocalWind.PushWind(transform, 50f);
+            playerLocalWind.PushWind(transform, 100f);
         }
     }
 }
