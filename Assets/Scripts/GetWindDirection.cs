@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GetWindDirection : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class GetWindDirection : MonoBehaviour
     public float windPower = 5f;
     private Vector3 setDirection;
     public Cloth myCloth;
+
+    public UnityEvent playerInside;
+    public UnityEvent playerOutside;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,11 +46,13 @@ public class GetWindDirection : MonoBehaviour
         {
             Debug.Log("Inside");
             myCloth.externalAcceleration = Vector3.zero;
+            playerInside.Invoke();
         }
         if (other.CompareTag("Outside"))
         {
             Debug.Log("Outside");
             myCloth.externalAcceleration = setDirection * windPower;
+            playerOutside.Invoke();
         }
     }
 }
